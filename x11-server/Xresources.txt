@@ -1,0 +1,5 @@
+! Default X11 resources
+XTerm*faceName: Monospace
+XTerm*faceSize: 12
+XTerm*foreground: white
+XTerm*background: black

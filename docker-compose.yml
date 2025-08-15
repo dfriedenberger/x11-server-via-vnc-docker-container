@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  x11server:
+    build: x11-server
+    container_name: x11-server
+    environment:
+      - RESOLUTION=1500x800
+    ports:
+      - "5901:5901"
+    networks:
+      - vncnet
+
+
+  wm:
+    build: window-manager
+    container_name: window-manager
+    networks:
+      - vncnet
+    environment:
+      - DISPLAY=x11-server:1
+      - WM=openbox
+    depends_on:
+      - x11server
+    
+  novnc:
+    build: novnc
+    container_name: novnc
+    networks:
+      - vncnet
+    ports:
+      - "6080:6080"
+    environment:
+      - VNC_HOST=x11-server
+      - VNC_PORT=5901
+    depends_on:
+      - x11server
+
+  test:
+    build: test
+    container_name: test
+    networks:
+      - vncnet
+    environment:
+      - DISPLAY=x11-server:1
+    
+
+networks:
+  vncnet:
+    driver: bridge
