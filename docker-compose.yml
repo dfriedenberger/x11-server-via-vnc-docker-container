@@ -43,7 +43,12 @@ services:
       - vncnet
     environment:
       - DISPLAY=x11-server:1
-    
+    depends_on:
+      - x11server
+      - wm
+    profiles:
+      - test
+
 
 networks:
   vncnet:

@@ -23,11 +23,18 @@ This project provides a modular Docker-based environment for running an X11 serv
    git clone https://github.com/dfriedenberger/x11-server-via-vnc-docker-container.git
    cd x11-server-via-vnc-docker-container
    ```
-2. Build and start the containers:
+
+2. Build and start the main containers:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
-3. Access the desktop:
+
+3. (Optional) To start the `test` container, use the `test` profile:
+   ```bash
+   docker compose --profile test up --build
+   ```
+
+4. Access the desktop:
    - With a VNC client: connect to `localhost:5901` (default password: `ubuntu`)
    - With your browser: open [http://localhost:6080](http://localhost:6080) for noVNC
 
