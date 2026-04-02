@@ -34,9 +34,11 @@ This project provides a modular Docker-based environment for running an X11 serv
    docker compose --profile test up --build
    ```
 
+   `test` uses the internal Docker network. `test2` connects via `host.docker.internal:1` and therefore requires the X11 port `6001` to be published on the host.
+
 4. Access the desktop:
    - With a VNC client: connect to `localhost:5901` (default password: `ubuntu`)
-   - With your browser: open [http://localhost:6080](http://localhost:6080) for noVNC
+   - With your browser: open [http://localhost:6080/vnc.html](http://localhost:6080/vnc.html) for noVNC
 
 ## Customization
 - Change the window manager by setting the `WM` environment variable in `docker-compose.yml` (`openbox`, `fluxbox`, or `icewm`)

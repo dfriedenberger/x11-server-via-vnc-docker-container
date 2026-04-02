@@ -8,6 +8,7 @@ services:
       - RESOLUTION=1500x800
     ports:
       - "5901:5901"
+      - "6001:6001"
     networks:
       - vncnet
 
@@ -36,9 +37,9 @@ services:
     depends_on:
       - x11server
 
-  test:
+  test-internal:
     build: test
-    container_name: test
+    container_name: test-internal
     networks:
       - vncnet
     environment:
@@ -49,6 +50,16 @@ services:
     profiles:
       - test
 
+  test-external:
+    build: test
+    container_name: test-external
+    environment:
+      - DISPLAY=host.docker.internal:1
+    depends_on:
+      - x11server
+      - wm
+    profiles:
+      - test
 
 networks:
   vncnet:
